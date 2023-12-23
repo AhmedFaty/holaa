@@ -1,0 +1,252 @@
+{% load static %}
+
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block tittle %} {% endblock %}</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="{% static 'img/Logo_nav.ico'%}" type="image/x-icon" />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;700&display=swap"
+        rel="stylesheet">
+
+
+
+    <!-- <link rel="stylesheet" href="{% static 'css/all.min.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <link href="{% static 'css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- carousel -->
+    <script type='text/javascript' src=''></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'>
+    </script>
+
+
+    <!-- evo calender -->
+    <link rel="stylesheet" href="{% static 'css/evo-calendar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/evo-calendar.midnight-blue.min.css' %}">
+
+
+
+</head>
+
+<body>
+
+    <nav id="navigation" class="navbar navbar-expand-lg navbar-light bg-ligth  fixed-top">
+        <div class="container bg-light bg-gradient align-items-stretch">
+            <div class="logo">
+
+                <a class="navbar-brand" href="{% url 'home:home' %}">
+
+                    DAHIRATOUL HOLAA
+                    
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
+
+                    <a class="nav-link" href="{% url 'articles:articles' %}">BLOC</a>
+                    <a class="nav-link" href="{% url 'mediatheque:mediatheque' %}">MEDIATHEQUES</a>
+                    <a class="nav-link" href="{% url 'events:events' %}">ÉVÉNEMENTS</a>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-mdb-toggle="dropdown" aria-expanded="false">
+                            ENSEIGNEMENT
+                        </a>
+
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'enseignement:enseignement' %}">
+                                    OUSTAZ I. DJIM THIAM</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'enseignement:ndaguasarr' %}">OUSTAZ NDAGGA
+                                    SARR</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'enseignement:fayda' %}">ETOILE DE LA FAYDA</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </div>
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mx-auto">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav">
+                            <!-- Icon dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-mdb-toggle="dropdown" aria-expanded="false">
+                                    <i class="flag-france flag m-0"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français
+                                            <i class="fa fa-check text-success ms-2"></i></a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="#"><i
+                                                class="flag-united-kingdom flag"></i>English </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" href="#"><i class="flag-sa flag"></i>Arabe</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+
+                <li id="get-started" class="nav-item">
+                    <a class="nav-link " href="{% url 'dahira:dahira' %}" style="font-weight: bold;">LE DAHIRA </a>
+                </li>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- End your project here-->
+
+    {% block contenu %}
+
+    {% endblock %}
+
+    <!-- Footer -->
+
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+    <div class="container my-5">
+
+        <!-- Footer -->
+        <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+            <!-- Section: Social media -->
+            <section class="d-flex justify-content-between p-4" style="background-color: #009970">
+                <!-- Left -->
+                <div class="me-5">
+                    <span>Get connected with us on social networks:</span>
+                </div>
+                <!-- Left -->
+
+                <!-- Right -->
+                <div>
+                    <a href="" class="text-white me-4">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="" class="text-white me-4">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="" class="text-white me-4">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="" class="text-white me-4">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="" class="text-white me-4">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="" class="text-white me-4">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <!-- Right -->
+            </section>
+            <!-- Section: Social media -->
+
+            <!-- Section: Links  -->
+            <section class="">
+                <div class="container text-md-start mt-3">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+
+                        <!-- Grid column -->
+                        <div class="col-md-6 mb-md-0 mb-3 ">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold text-success">Contact</h6>
+                            <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                style="width: 60px; background-color: #7c4dff; height: 2px" />
+                            <p><i class="fas fa-home me-4 text-success"></i> Almadies 2 </p>
+                            <p><i class="fas fa-phone me-4 text-success"></i> +221 000 00 00</p>
+
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                </div>
+            </section>
+            <!-- Section: Links  -->
+
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                © 2023 Copyright:
+                <a class="text-warning">Da ImanTech | Tel: +221 775843341</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+
+    </div>
+    <!-- End of .container -->
+
+
+    </div>
+
+    <!-- MDB -->
+    <script src="{% static 'js/owl.carousel.min.js'%}"></script>
+
+    <script type="text/javascript" src="{% static 'js/mdb.min.js'%}"></script>
+    <!-- Custom scripts -->
+    <script type="{% static 'text/javascript'%}"></script>
+    <script type="{% static 'js/script.js'%}"></script>
+
+
+
+
+
+    <!-- Add the evo-calendar.css for styling -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <!-- Add the evo-calendar.css for styling -->
+    <script src="{% static 'js/evo-calendar.min.js'%}"></script>
+
+    <!-- Initialize evo-calendar in your script file or an inline -->
+
+
+</body>
+
+</html>

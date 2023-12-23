@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<div class="container">
+
+    <div class="card mb-3">
+        <img src="{{ article.image.url }}" class="card-img-top" alt="Wild Landscape" style="height: 30rem;" />
+        <div class="card-body">
+            <h5 class="card-title display-4">{{ article.titre }}</h5>
+            <p class="card-text lead text-muted">{{ article.contenu }}</p>
+            <p class="card-text">
+                <small class="text-muted">Last updated  {{ article.date_published |timesince }}</small>
+            </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

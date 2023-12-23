@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load embed_video_tags %}
+
+
+{% block tittle %} Media {% endblock %}
+
+{% block contenu %}
+
+<div class="container text-center mt-4 pt-5 shadow p-3 mb-5 bg-body rounded">
+
+    {% for head in header %}
+    <!-- Background image -->
+    <div class="bg-image" style="
+  background-image: url(' {{ head.image.url}} '); height: 50vh;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <h1 class="display-4 text-light">{{ head.titre }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+    <br>
+    <p class="lead text-muted">{{ head.contenu }}</p>
+
+    {% endfor %}
+
+</div>
+
+
+<div class="container mb-4">
+    <hr class="my-4">
+
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+
+        {% for item in video %}
+
+        <div class="col-md-6 col-lg-4 mb-4">
+
+            <div class="card">
+                <div class="ratio ratio-16x9">
+                    {% video item.url %}
+                    </iframe>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.titre  | truncatewords:3 }}</h5>
+                    <p class="card-text"> {{ item.desc | truncatewords:4 }} </p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    {% include "articles/pagination.html" with page=video %}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+
+<div class="container text-center mt-4 pt-5 shadow p-3 mb-5 bg-body rounded">
+
+    {% for head in header %}
+    <!-- Background image -->
+    <div class="bg-image" style="
+  background-image: url(' {{ head.image.url}} '); height: 50vh;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <h1 class="display-4 text-light">{{ head.titre }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+    <br>
+    <p class="lead text-muted">{{ head.contenu }}</p>
+
+    {% endfor %}
+
+</div>
+
+<div class="container px-4 px-lg-5">
+    <!-- Heading Row-->
+    {% for dg in motdirecteur %}
+
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="{{ dg.image.url }}" />
+        </div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">{{ dg.titre }}</h1>
+            <p>{{ dg.contenu | truncatewords:70}}</p>
+            <a class="btn btn-success" href="{%   url 'dahira:motdg' %}">Lire la suite</a>
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+
+    <!-- Call to Action-->
+    <div class="card text-white my-5 py-4 text-center" , style="background-color: #0F172B;">
+        <div class="card-body">
+            <h3 class="text-white m-0 ">Formulaire pour devenir membre du Dahira </h3>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+
+        <form action="{% url 'dahira:dahira' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">VALIDER</button>
+        </form>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

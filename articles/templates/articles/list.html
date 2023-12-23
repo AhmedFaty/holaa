@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block tittle %} Page d'articles {% endblock %}
+
+{% block contenu %}
+
+<div class="container text-center mt-4 pt-5 shadow p-3 mb-5 bg-body rounded">
+
+    {% for head in header %}
+    <!-- Background image -->
+    <div class="bg-image" style="
+  background-image: url(' {{ head.image.url}} '); height: 50vh;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <h1 class="display-4 text-light">{{ head.titre }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+    <br>
+    <p class="lead text-muted">{{ head.contenu }}</p>
+
+    {% endfor %}
+
+</div>
+
+
+<hr class="my-4">
+
+<div class="container">
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light"
+                    style="height: 250px; width: auto;">
+                    <img src="{{ article.image.url }}" class="img-fluid" />
+                    <a href="{% url 'articles:article' slug=article.slug %}">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.titre }}</h5>
+                    <p class="card-text">{{ article.contenu | truncatewords:25}}</p>
+                    <hr>
+                    <p class="card-text">Publish {{ article.date_published |timesince }}</p>
+                    <div class="text-center">
+                        <a href="{% url 'articles:article' slug=article.slug %}" class="btn btn-success">Lire la
+                            suite</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Pagination-->
+    {% include "articles/pagination.html" with page=articles %}
+
+
+</div>
+
+{% endblock %}

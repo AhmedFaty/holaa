@@ -1,0 +1,310 @@
+{% extends 'template_base.html' %}
+
+{% load static %}
+
+
+{% block tittle %}Page d'accueil {% endblock %}
+
+{% block contenu %}
+
+<div class="container">
+    <div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/media/first_page1.jpg" class="d-block w-100" alt="Wild Landscape" />
+            </div>
+            <div class="carousel-item">
+                <img src="/media/first_page2.jpg" class="d-block w-100" alt="Camera" />
+            </div>
+            <div class="carousel-item">
+                <img src="/media/first_page3.jpg" class="d-block w-100" alt="Exotic Fruits" />
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls"
+            data-mdb-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls"
+            data-mdb-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="container text-center">
+        <h1 class="display-4 pt-3">Dahiratoul Holaa</h1>
+
+        <hr class="bg-success">
+
+        <p class="lead text-muted">
+            Dahiratoul Holaa est une association religieuse basée à Almadies 2 qui œuvre pour la promotion de la
+            paix, de l’unité de la Oumah islamique, de l’entraide, du savoir, de l’éducation islamique entre autres
+            valeurs. Son président Oustaz Ahmad Ba est un conférencier dont les interventions sont très remarquées
+            au milieu de la Fayda Tijanya et de la communauté de Médina Baye.
+        </p>
+        <a href="{%  url 'articles:articles' %}" type="button" class="btn btn-warning">
+            Voir les articles
+        </a>
+    </div>
+
+</div>
+
+
+<div class="container pt-5">
+    <div class="row">
+        {% for post in posts %}
+        <div class="card col-lg mb-4" style="max-width: auto;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ post.image.url}}" alt="Trendy Pants and Shoes" class="img-fluid rounded-start" />
+                    <a href="{%   url 'biblio' %}">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title display-4">{{ post.titre }}</h2>
+                        <p class="card-text lead text-muted">{{ post.contenu | truncatewords:50}} </p>
+                        <p class="card-text text-center">
+                            <br>
+                            <!-- <a href="{%  url 'biblio' %}" type="button" class="btn btn-warning"> -->
+                            <a href="#" type="button" class="btn btn-warning">
+
+                                Lire plus
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="container text-center">
+
+        <div class="row align-items-start">
+            {% for team in teams %}
+
+            <div class="col">
+
+                <div class="card">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light"
+                        style="height: 300px; width: auto;">
+                        <img src="{{ team.image.url}}" class="img-fluid" />
+                        <a href="{%   url 'teams' team.slug %}">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title display-5">{{ team.titre }}</h5>
+                        <p class="card-text text-muted">{{ team.contenu | truncatewords:15 }}</p>
+
+                        <a href="{%   url 'teams' team.slug %}" class="btn btn-warning">Lire</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="container">
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="contenainer mt-0">
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase text-success">Madrassa </h2>
+                    <h3 class="section-subheading text-warning">Établissement islamique d'enseignement sunnite</h3>
+                </div>
+                <div class="row">
+                    {% for madrassa in madrassa %}
+
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="card">
+                            <div class="portfolio-item">
+                                <a class="portfolio-link" data-bs-toggle="modal"
+                                    href="{%   url 'madrassa' madrassa.slug %}">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                    </div>
+                                    <img class="img-fluid" src="{{ madrassa.image.url}}" alt="..."
+                                        style="height: 250px;" />
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title display-6">{{ madrassa.titre }}</h5>
+                                <p class="card-text lead text-muted">{{ madrassa.contenu | truncatewords:15 }}</p>
+                                <div class="text-center">
+                                    <a href="{%   url 'madrassa' madrassa.slug %}" class="btn btn-warning">Button</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+        </section>
+
+    </div>
+
+    <!-- Team-->
+    <section class="page-section bg-white rounded-9 border mb-5" id="team">
+
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase text-success">Plume soufis</h2>
+                <h3 class="section-subheading text-warning">Citation de Baye NIASS.</h3>
+            </div>
+
+            <ul class="cards">
+
+                {% for soufis in soufis %}
+                <li class="carte">
+                    <div class="team-member">
+                        <a href="{%   url 'soufis' soufis.slug %}">
+                            <img class="mx-auto rounded-circle" src="{{ soufis.image.url}}" alt="{ soufis.titre }" />
+                        </a>
+                        <h3 class="carte-title">{{ soufis.titre }}</h3>
+                        <div class="carte-content"> {{ soufis.contenu | truncatewords:15 }} </p>
+                        </div>
+                    </div>
+                    <div class="carte-link-wrapper text-center">
+                        <a href="{%   url 'soufis' soufis.slug %}" class="carte-link">Lire</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam
+                    corporis ea, alias ut unde.</p>
+            </div>
+        </div>
+        <!-- {% include "articles/layouts/pagination.html" with page=soufis %} -->
+
+
+
+    </section>
+
+    <!-- Contact-->
+    <section class="page-section pt-5" id="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Contact Us</h2>
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            </div>
+            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <!-- Name input-->
+                            <input class="form-control" id="name" type="text" placeholder="Your Name *"
+                                data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Email address input-->
+                            <input class="form-control" id="email" type="email" placeholder="Your Email *"
+                                data-sb-validations="required,email" />
+                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.
+                            </div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        </div>
+                        <div class="form-group mb-md-0">
+                            <!-- Phone number input-->
+                            <input class="form-control" id="phone" type="tel" placeholder="Your Phone *"
+                                data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is
+                                required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-group-textarea mb-md-0">
+                            <!-- Message input-->
+                            <textarea class="form-control" id="message" placeholder="Your Message *"
+                                data-sb-validations="required"></textarea>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Submit success message-->
+                <!---->
+                <!-- This is what your users will see when the form-->
+                <!-- has successfully submitted-->
+                <div class="d-none" id="submitSuccessMessage">
+                    <div class="text-center text-white mb-3">
+                        <div class="fw-bolder">Form submission successful!</div>
+                        To activate this form, sign up at
+                        <br />
+                        <a
+                            href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                    </div>
+                </div>
+                <!-- Submit error message-->
+                <!---->
+                <!-- This is what your users will see when there is-->
+                <!-- an error submitting the form-->
+                <div class="d-none" id="submitErrorMessage">
+                    <div class="text-center text-danger mb-3">Error sending message!</div>
+                </div>
+                <!-- Submit Button-->
+                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled bg-warning"
+                        id="submitButton" type="submit">Send Message</button></div>
+            </form>
+        </div>
+    </section>
+
+    <br>
+
+    <div class="container text-center">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-warning " data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">
+            <h1 class="text-center"> Mots du Directeur de la Dahira </h1>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">test 1
+                        </h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">test 2 contenu</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    
+</div>
+
+{% endblock %}

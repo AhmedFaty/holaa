@@ -1,0 +1,15 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+<div class="container">
+
+    <div class="card mb-3">
+        <img src="{{ soufis.image.url}}" class="card-img-top" alt="Wild Landscape" style="height: 50rem;" />
+        <div class="card-body">
+            <h5 class="card-title display-4"> {{ soufis.titre }}</h5>
+            <p class="card-text lead text-muted">{{ soufis.contenu }}</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

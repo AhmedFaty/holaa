@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block contenu %}
+<div class="container">
+
+    <div class="card mb-3">
+        <img src="{{ madrassa.image.url }}" class="card-img-top" alt="Wild Landscape" style="height: 30rem;" />
+        <div class="card-body">
+            <h5 class="card-title display-4">{{ madrassa.titre }}</h5>
+            <p class="card-text lead text-muted">{{ madrassa.contenu}}</p>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

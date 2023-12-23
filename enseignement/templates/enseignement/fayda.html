@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% load embed_video_tags %}
+
+
+{% block tittle %} Mediatheques {% endblock %}
+
+{% block contenu %}
+
+<div class="container text-center mt-4 pt-5 shadow p-3 mb-5 bg-body rounded">
+
+    {% for head in header %}
+    <!-- Background image -->
+    <div class="bg-image" style="
+  background-image: url(' {{ head.image.url}} '); height: 50vh;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <h1 class="display-4 text-light">{{ head.titre }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+    <br>
+    <p class="lead text-muted">{{ head.contenu }}</p>
+
+    {% endfor %}
+</div>
+
+
+
+<div class="container px-4 px-lg-5">
+    <!-- Heading Row-->
+    {% for hommage in hommage %}
+
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">{{ hommage.titre }}</h1>
+            <p>{{ hommage.contenu | truncatewords:70}}</p>
+            <a class="btn btn-success" href=" {%   url 'enseignement:hommage' %}">Lire la suite</a>
+        </div>
+
+        
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="{{ hommage.image.url }}" />           
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+    <!-- Call to Action-->
+    <div class="card text-white my-5 py-4 text-center" , style="background-color: #0F172B;">
+        <div class="card-body">
+            <h3 class="text-white m-0 ">Rubrique Etoile de la FAYDA </h3>
+        </div>
+    </div>
+
+
+    <!-- Content Row-->
+
+
+    <div class="row gx-4 gx-lg-5">
+    {% for article in articles %}
+
+        <div class="col-md-4 mb-5">
+
+            <div class="card h-100">
+
+                <div class="team-member" style="margin: 0px;">
+                    <a href="{{ article.image.url }}">
+                      <img class="mx-auto rounded-circle" src="{{ article.image.url }}" />
+                    </a>
+                    <a href="{% url 'enseignement:article' slug=article.slug %}">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0);"></div>
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <h2 class="card-title text-success">{{ article.titre | truncatewords:3}}</h2>
+                    <p class="card-text">{{ article.contenu | truncatewords:25}}</p>
+                    <p class="card-text text-warning">Publish {{ article.date_published |timesince }}</p>
+
+                </div>
+                <div class="card-footer text-center bg-success"><a class="btn btn-primary btn-sm bg-light text-success" 
+                    href="{% url 'enseignement:article' slug=article.slug %}">Lire la suite</a></div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% include "articles/pagination.html" with page=articles %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}

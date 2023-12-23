@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% load embed_video_tags %}
+
+
+{% block tittle %} Mediatheques {% endblock %}
+
+{% block contenu %}
+
+<div class="container text-center mt-4 pt-5 shadow p-3 mb-5 bg-body rounded">
+
+    {% for head in header %}
+    <!-- Background image -->
+    <div class="bg-image" style="
+  background-image: url(' {{ head.image.url}} '); height: 50vh;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <h1 class="display-4 text-light">{{ head.titre }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+    <br>
+    <p class="lead text-muted">{{ head.contenu }}</p>
+
+    {% endfor %}
+
+</div>
+
+<div class="container">
+    <div class="hero">
+
+        <div id="calendar"></div>
+
+
+    </div>
+</div>
+
+
+
+<div class="container px-lg-5">
+
+    <!-- Call to Action-->
+    <div class="card text-white my-5 py-2 text-center" , style="background-color: #0F172B;">
+        <div class="card-body">
+            <h3 class="text-white m-0 ">Vidéo des evenements </h3>
+        </div>
+    </div>
+
+    <!-- Content Row-->
+
+
+    <div class="row">
+
+        {% for item in video %}
+
+        <div class="col-md-6 col-lg-4 mb-4">
+
+            <div class="card">
+                <div class="ratio ratio-16x9">
+                    {% video item.url %}
+                    </iframe>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.titre | truncatewords:3 }}</h5>
+                    <p class="card-text"> {{ item.desc | truncatewords:4 }} </p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    {% include "articles/pagination.html" with page=video %}
+
+
+
+</div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        console.log("Script exécuté");
+        var eventData = JSON.parse('{{ event_data|escapejs }}');
+        console.log("eventData après parsing JSON : " + eventData);
+        var calendarEvents = [];
+
+        eventData.forEach(function (event) {
+            calendarEvents.push({
+                id: event.pk,
+                name: event.fields.name,
+                date: new Date(event.fields.event_date),
+                description: [event.fields.description, event.fields.time],
+                type: event.fields.type,
+                everyYear: true
+            });
+        });
+
+        $('#calendar').evoCalendar({
+            theme: "Midnight Blue",
+            calendarEvents: calendarEvents
+        });
+
+    })
+</script>
+
+{% endblock %}

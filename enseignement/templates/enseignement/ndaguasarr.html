@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% load embed_video_tags %}
+
+
+{% block tittle %} Oustaz Ndaga Sar {% endblock %}
+
+
+
+{% block contenu %}
+
+<div class="container text-center mt-4 pt-5 shadow p-3 mb-5 bg-body rounded">
+
+    {% for head in header %}
+    <!-- Background image -->
+    <div class="bg-image" style="
+  background-image: url(' {{ head.image.url}} '); height: 50vh;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <h1 class="display-4 text-light">{{ head.titre }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+    <br>
+    <p class="lead text-muted">{{ head.contenu }}</p>
+
+    {% endfor %}
+</div>
+
+
+
+<div class="container px-4 px-lg-5">
+    <!-- Heading Row-->
+    {% for biblio in biblio %}
+
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="{{ biblio.image.url }}" alt="..." />
+        </div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">{{ biblio.titre }}</h1>
+            <p>{{ biblio.contenu | truncatewords:70}}</p>
+            <a class="btn btn-success" href=" {%   url 'enseignement:bibliosarr' %}">Lire la suite!</a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+    <!-- Call to Action-->
+    <div class="card text-white my-5 py-4 text-center" , style="background-color: #0F172B;">
+        <div class="card-body">
+            <h3 class="text-white m-0 ">Rubrique Avec Oustaz Ndagua SARR </h3>
+        </div>
+    </div>
+
+    <!-- Content Row-->
+
+    <div class="container px-lg-5">
+        <div class="row">
+
+            {% for item in video %}
+
+            <div class="col-md-6 col-lg-4 mb-4">
+
+                <div class="card">
+                    <div class="ratio ratio-16x9">
+                        {% video item.url %}
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.titre | truncatewords:3 }}</h5>
+                        <p class="card-text"> {{ item.desc | truncatewords:3 }} </p>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="large text-muted">Rubrique Avec Oustaz Ndagua SARR.</p>
+            </div>
+        </div>
+    
+
+        {% include "articles/pagination.html" with page=video %}
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}
